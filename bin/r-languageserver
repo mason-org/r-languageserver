@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$0")"
+PKG_ROOT=$(realpath "${SCRIPT_DIR}/..")
+
+exec R --slave -f "${PKG_ROOT}/src/server.r" --args "${PKG_ROOT}/build"

@@ -23,6 +23,13 @@ if [[ $FORCE != 1 ]] && gh release view "$VERSION"; then
     exit 0
 fi
 
+if [[ -n $GITHUB_ACTOR ]]; then
+  git config --local user.email "${GITHUB_ACTOR}"
+  git config --local user.name "${GITHUB_ACTOR}@users.noreply.github.com"
+fi
+
+git tag -f -a -m "$VERSION" "$VERSION"
+git push -f origin "refs/tags/${VERSION}"
 if ! gh release view "$VERSION"; then
     gh release create "$VERSION" --generate-notes
 fi

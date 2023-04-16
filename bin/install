@@ -2,8 +2,12 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(dirname "$0")"
-PKG_ROOT=$(realpath "${SCRIPT_DIR}/..")
+declare PKG_ROOT
+if [[ $(uname -s) == Darwin ]]; then
+    PKG_ROOT=$(perl -e "use File::Basename; use Cwd qw(abs_path); print(dirname(dirname(abs_path('$0'))))")
+else
+    PKG_ROOT=$(dirname "$(dirname "$(realpath "$0")")")
+fi
 BUILD_DIR="${PKG_ROOT}/build"
 
 mkdir "$BUILD_DIR"

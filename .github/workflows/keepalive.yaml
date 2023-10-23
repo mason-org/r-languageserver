@@ -11,3 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: gautamkrishnar/keepalive-workflow@v1
+        with:
+          gh_token: ${{ secrets.BOT_GH_TOKEN }}

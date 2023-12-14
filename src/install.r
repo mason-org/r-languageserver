@@ -5,7 +5,11 @@ ref <- args[2]
 
 options(langserver_library = langserver_library)
 options(langserver_quiet = FALSE)
-options(repos = list(CRAN = "http://cran.rstudio.com/"))
+local({
+  current_cran <- getOption("repos")["CRAN"]
+  if (current_cran == "@CRAN@")
+    options(repos = c(CRAN = "https://cloud.r-project.org"))
+})
 rls_lib <- getOption("langserver_library")
 .libPaths(new = rls_lib)
 did_install_remotes <- FALSE

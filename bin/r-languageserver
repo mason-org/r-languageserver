@@ -10,4 +10,4 @@ else
     PKG_ROOT=$(dirname "$(dirname "$(realpath "$0")")")
 fi
 
-exec R --slave -f "${PKG_ROOT}/src/server.r" --args "${PKG_ROOT}/build"
+exec R --no-echo -f "${PKG_ROOT}/src/server.r" --args "${PKG_ROOT}/build"
